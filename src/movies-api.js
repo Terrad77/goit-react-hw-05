@@ -1,5 +1,6 @@
 //npm install axios
 import axios from 'axios';
+
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 
 // const TMDB_API_KEY = '948c9eb08635b5d08cc7dd3d37be71c0';
@@ -11,9 +12,9 @@ export const getMovies = async () => {
     const response = await axios.get('/trending/movie/day', {
       headers: { Authorization: `Bearer ${TMDB_ACCES_TOKEN}` },
     });
-    return response.data.results;
+    return response.data;
   } catch (error) {
-    console.error('Error fetching trending movies:', error);
+    console.error('Error fetching data', error);
     throw error;
   }
 };

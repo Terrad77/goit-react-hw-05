@@ -2,9 +2,11 @@ import css from './MovieList.module.css';
 
 export default function MovieList({ movies }) {
   return (
-    <ul>
+    <ul className={css.moviesList}>
       {movies.map(movie => (
-        <li key={movie.id}>{movie}</li>
+        <li className={css.moviesItem} key={movie.id}>
+          <a href="">{movie.title}</a>
+        </li>
       ))}
     </ul>
   );

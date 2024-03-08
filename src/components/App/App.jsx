@@ -4,14 +4,10 @@ import MoviesPage from '../../pages/MoviesPage/MoviesPage';
 import { useEffect, useState } from 'react';
 // import { fetchImages } from '../../movies-api';
 
-// import SearchBar from '../SearchBar/SearchBar';
-// import ImageGallery from '../ImageGallery/ImageGallery';
 // import Loader from '../Loader/Loader';
 // //npm install react-hot-toast
 // import { Toaster } from 'react-hot-toast';
-// import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 // import ImageModal from '../ImageModal/ImageModal';
-// import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 import { Routes, Route } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
