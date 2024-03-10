@@ -1,10 +1,4 @@
-import {
-  Link,
-  NavLink,
-  Outlet,
-  useLocation,
-  useParams,
-} from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
 import css from './MovieDetailsPage.module.css';
 import { RiArrowGoBackFill } from 'react-icons/ri';
 import React, { Suspense, useEffect, useRef, useState } from 'react';

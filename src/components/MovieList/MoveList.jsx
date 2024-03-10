@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import css from './MovieList.module.css';
 
 export default function MovieList({ movies }) {

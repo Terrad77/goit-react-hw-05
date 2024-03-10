@@ -56,10 +56,9 @@ export const getReviews = async movieId => {
   }
 };
 
-export const searchMovies = async a => {
-  console.log(a);
+export const searchMovies = async params => {
   try {
-    const response = await axios.get(`/search/movie?query=${a}`, options);
+    const response = await axios.get(`/search/movie?query=${params}`, options);
     return response.data;
   } catch (error) {
     console.error('Error fetching movies by query', error);
