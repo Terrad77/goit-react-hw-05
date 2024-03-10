@@ -1,7 +1,13 @@
-import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
 import css from './MovieDetailsPage.module.css';
 import { RiArrowGoBackFill } from 'react-icons/ri';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { getMovieById } from '../../movies-api';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -13,6 +19,9 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  const location = useLocation();
+  const backLinkRef = useRef(location.state ?? '/');
 
   useEffect(() => {
     async function getData() {
@@ -39,7 +48,7 @@ export default function MovieDetailsPage() {
       <Toaster />
       <button className={css.btn} type="submit">
         <RiArrowGoBackFill className={css.icon} />
-        <NavLink to="/" className={css.btnText}>
+        <NavLink to={backLinkRef.current} className={css.btnText}>
           go Back
         </NavLink>
       </button>
@@ -91,7 +100,9 @@ export default function MovieDetailsPage() {
           <NavLink to="reviews">Reviews</NavLink>
         </li>
       </ul>
-      <Outlet />
+      <Suspense fallback={<b>Loading sub component...</b>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 }
