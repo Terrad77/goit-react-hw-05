@@ -1,8 +1,9 @@
-import { Outlet, useParams } from 'react-router-dom';
+import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
 import css from './MovieDetailsPage.module.css';
 import { RiArrowGoBackFill } from 'react-icons/ri';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getMovieById } from '../../movies-api';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function MovieDetailsPage() {
   //отримання значення параметрів від url
@@ -18,9 +19,10 @@ export default function MovieDetailsPage() {
       try {
         setIsLoading(true);
         const data = await getMovieById(movieId);
-        setMovie(data.results);
+        setMovie(data);
       } catch (error) {
         setError(true);
+        toast.error(error);
         console.error(error);
       } finally {
         setIsLoading(false);
@@ -29,27 +31,67 @@ export default function MovieDetailsPage() {
     getData();
   }, [movieId]);
 
+  const defaultImg =
+    'https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg';
+
   return (
     <div className={css.container}>
+      <Toaster />
       <button className={css.btn} type="submit">
         <RiArrowGoBackFill className={css.icon} />
-        Go back
+        <NavLink to="/" className={css.btnText}>
+          go Back
+        </NavLink>
       </button>
-      <h2>MovieDetailsPage: {movieId}</h2>
-      {movie && (
-        <>
-          <img
-            src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
-          ></img>
-          <ul>
-            <li>Title:{movie.title}</li>
-            <li>Overview:{movie.overview}</li>
-            <li>Genres:{movie.genres}</li>
-          </ul>
-        </>
+      {isLoading && <b>Loading details...</b>}
+      {error && (
+        <b>HTTP error! Error fetching details. Please try again later.</b>
       )}
+      {movie && (
+        <div className={css.movieCard}>
+          <img
+            className={css.moviePoster}
+            src={
+              movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                : defaultImg
+            }
+            width={350}
+            alt="poster"
+          ></img>
+          <ul className={css.movieInfo}>
+            <li className={css.title}>
+              <b>{movie.title}</b>
+              <span>User Score: {Math.round(movie.vote_average * 10)}%</span>
+            </li>
+            <li>
+              <b>Overview</b>
+              <span>{movie.overview}</span>
+            </li>
+            <li>
+              <b>Genres</b>
+              <span>
+                {movie.genres.map((genre, index) => (
+                  <React.Fragment key={genre.id}>
+                    {genre.name}
+                    {index < movie.genres.length - 1 && ', '}
+                  </React.Fragment>
+                ))}
+              </span>
+            </li>
+          </ul>
+        </div>
+      )}
+      <p>Additional information</p>
+      <ul className={css.subPageContainer}>
+        <li>
+          <NavLink to="cast">Cast</NavLink>
+        </li>
+        <li>
+          <NavLink to="reviews">Reviews</NavLink>
+        </li>
+      </ul>
       <Outlet />
-      {/* MovieCast, MovieReviews */}
     </div>
   );
 }

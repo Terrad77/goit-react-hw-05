@@ -27,9 +27,15 @@ export default function HomePage() {
   return (
     <div className={css.homePageContainer}>
       <h1>Trending today</h1>
-      {isLoading && <b>Loading movies...</b>}
-      {error && <b>HTTP error!!!</b>}
-      <MovieList movies={movies} />
+      {isLoading && <b>Loading trending movies...</b>}
+      {error && (
+        <b>HTTP error! Error fetching movies. Please try again later.</b>
+      )}
+      {movies.length > 0 ? (
+        <MovieList movies={movies} />
+      ) : (
+        <b>Sorry, no movies available.</b>
+      )}
     </div>
   );
 }
