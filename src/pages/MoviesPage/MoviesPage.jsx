@@ -1,5 +1,5 @@
 import css from './MoviesPage.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { searchMovies } from '../../movies-api';
 //npm install react-hot-toast
 import toast, { Toaster } from 'react-hot-toast';
@@ -14,6 +14,11 @@ export default function MoviesPage() {
 
   const [params, setParams] = useSearchParams();
   const movieFilter = params.get('query') ?? '';
+
+  useEffect(() => {
+    const render = async () => setMovies(await searchMovies(movieFilter));
+    render();
+  }, []);
 
   // ф-ція зміни параметрів запиту
   const changeMovieFilter = newFilter => {
@@ -51,6 +56,7 @@ export default function MoviesPage() {
         <Toaster />
         <input
           type="text"
+          name="find_movie"
           value={movieFilter}
           onChange={e => changeMovieFilter(e.target.value)}
         />
