@@ -29,6 +29,7 @@ export default function MoviesPage() {
       return;
     }
     try {
+      setMovies([]);
       setIsLoading(true);
       const data = await searchMovies(movieFilter);
       setMovies(data.results);

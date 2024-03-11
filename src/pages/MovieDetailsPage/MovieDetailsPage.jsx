@@ -15,7 +15,8 @@ export default function MovieDetailsPage() {
   const [error, setError] = useState(false);
 
   const location = useLocation();
-  const backLinkRef = useRef(location.state ?? '/');
+
+  const backLinkRef = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     async function getData() {
