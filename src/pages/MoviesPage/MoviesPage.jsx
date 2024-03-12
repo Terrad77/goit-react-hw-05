@@ -43,15 +43,15 @@ export default function MoviesPage() {
     //коли запит є виклик ф-ції з наданням ій значення запиту
     const fetchData = async () => {
       const data = await fetchSearchMovie(query);
+      return data;
     };
     fetchData()
-      .then(data => {
-        // console.log('print data:', data.results);
-        if (!data) {
-          return alert(`Sorry don't found any by query: ${query}`);
-        }
-        setMovies(data.results);
-      })
+      //   .then(data => {
+      //     if (data.results.length == 0) {
+      //       return alert(`Sorry don't found any by query: ${query}`);
+      //     }
+      //     setMovies(data.results);
+      //   })
       .catch(error => alert(error));
   }, [query]);
 
@@ -69,7 +69,6 @@ export default function MoviesPage() {
     try {
       setIsLoading(true);
       const info = await searchMovies(searchQuery);
-      console.log('info.results:', info.results);
 
       // // Check if info and info.results are defined before setting movies
       // if (info && info.results) {
