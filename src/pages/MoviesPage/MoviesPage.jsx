@@ -32,6 +32,7 @@ export default function MoviesPage() {
       return alert("Can't find movies while input field is empty");
     }
     setSearchParams({ query: value });
+    setValue(''); // Очистити поле вводу після сабміту
   };
 
   //ефект що виконується при монтуванні та при зміні значення параметру key=query
