@@ -97,9 +97,13 @@ export default function MoviesPage() {
 
   return (
     <div className={css.container}>
-      <SearchForm />
-      {/* <form className={css.form} onSubmit={onFormSubmit}>
-        <Toaster />
+      <Toaster />
+      <SearchForm
+        onFormSubmit={onFormSubmit}
+        value={value}
+        changeMovieFilter={changeMovieFilter}
+      />
+      {/* <form className={css.form} onSubmit={onFormSubmit}>       
         <input
           type="text"
           name="find_movie"
