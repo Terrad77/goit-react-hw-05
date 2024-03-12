@@ -4,6 +4,7 @@ import { searchMovies } from '../../movies-api';
 import toast, { Toaster } from 'react-hot-toast';
 import { useSearchParams } from 'react-router-dom';
 import MovieList from '../../components/MovieList/MoveList';
+import SearchForm from '../../components/SearchForm/SearchForm';
 
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
@@ -96,7 +97,8 @@ export default function MoviesPage() {
 
   return (
     <div className={css.container}>
-      <form className={css.form} onSubmit={onFormSubmit}>
+      <SearchForm />
+      {/* <form className={css.form} onSubmit={onFormSubmit}>
         <Toaster />
         <input
           type="text"
@@ -106,7 +108,7 @@ export default function MoviesPage() {
           onChange={changeMovieFilter}
         />
         <button className={css.btnSearch}>Search</button>
-      </form>
+      </form> */}
       {isLoading && <b>Loading search movies...</b>}
       {error && <b>HTTP error!</b>}
       <MovieList movies={filteredMovies} />
