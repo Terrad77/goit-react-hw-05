@@ -72,7 +72,7 @@ export default function MoviesPage() {
         changeMovieFilter={changeMovieFilter}
       />
       {isLoading && <b>Loading search movies...</b>}
-      {error && <b>HTTP error!</b>}
+      {error && <b>HTTP error!🤔</b>}
       <MovieList movies={filteredMovies} />
     </div>
   );
